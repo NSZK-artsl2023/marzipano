@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Timeless Treasures - Virtual Tour</title>
+  <script src="https://cdn.pannellum.org/2.5/pannellum.js"></script>
+  <link rel="stylesheet" href="https://cdn.pannellum.org/2.5/pannellum.css" />
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+      background-color: #000;
+    }
+    #panorama {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="panorama"></div>
+
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/09/18/audio_1d683e4c2e.mp3?filename=soft-piano-131280.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Voice Guide -->
+  <audio id="voiceGuide" autoplay>
+    <source src="https://cdn.pixabay.com/download/audio/2021/10/08/audio_5e7c0a93e2.mp3?filename=voice-intro.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    const voiceGuide = document.getElementById('voiceGuide');
+
+    function playVoice(src) {
+      voiceGuide.src = src;
+      voiceGuide.play();
+    }
+
+    pannellum.viewer('panorama', {
+      "default": {
+        "firstScene": "scene1",
+        "author": "Timeless Treasures Team",
+        "sceneFadeDuration": 2000,
+        "autoLoad": true
+      },
+      "scenes": {
+        "scene1": {
+          "title": "Welcome to Hisham's Palace",
+          "type": "equirectangular",
+          "panorama": "https://images.unsplash.com/photo-1542640244-7e5f07e6dadf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+          "pitch": 0,
+          "yaw": 180,
+          "hotSpots": [
+            {
+              "pitch": -5,
+              "yaw": 110,
+              "type": "scene",
+              "text": "Enter the Main Hall",
+              "sceneId": "scene2"
+            }
+          ],
+          "onSceneLoad": () => playVoice("https://cdn.pixabay.com/download/audio/2023/03/14/audio_3a5fb96062.mp3?filename=hishams-palace-intro.mp3")
+        },
+        "scene2": {
+          "title": "The Main Hall",
+          "type": "equirectangular",
+          "panorama": "https://images.unsplash.com/photo-1522174469497-dc01f0f2bff6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+          "pitch": 0,
+          "yaw": 180,
+          "hotSpots": [
+            {
+              "pitch": -5,
+              "yaw": 200,
+              "type": "scene",
+              "text": "Go to the Mosaic Courtyard",
+              "sceneId": "scene3"
+            },
+            {
+              "pitch": -5,
+              "yaw": 0,
+              "type": "scene",
+              "text": "Back to Entrance",
+              "sceneId": "scene1"
+            }
+          ],
+          "onSceneLoad": () => playVoice("https://cdn.pixabay.com/download/audio/2022/10/11/audio_cb117d8463.mp3?filename=main-hall-description.mp3")
+        },
+        "scene3": {
+          "title": "Mosaic Courtyard",
+          "type": "equirectangular",
+          "panorama": "https://images.unsplash.com/photo-1622473595374-457f41726b2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+          "pitch": 0,
+          "yaw": 180,
+          "hotSpots": [
+            {
+              "pitch": -5,
+              "yaw": 180,
+              "type": "scene",
+              "text": "Back to Main Hall",
+              "sceneId": "scene2"
+            }
+          ],
+          "onSceneLoad": () => playVoice("https://cdn.pixabay.com/download/audio/2022/03/04/audio_ea18f65c1f.mp3?filename=mosaic-courtyard-description.mp3")
+        }
+      }
+    });
+  </script>
+</body>
+</html>
